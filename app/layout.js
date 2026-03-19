@@ -5,6 +5,13 @@ export const metadata = {
   description: "All the drama, none of the spoilers",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -14,7 +21,7 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body className="bg-bg font-sans">{children}</body>
+      <body className="bg-bg font-sans min-h-screen">{children}</body>
     </html>
   );
 }
