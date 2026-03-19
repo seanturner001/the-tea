@@ -47,63 +47,168 @@ export default function TheTea() {
       return n;
     });
 
+  // Colors
+  const pink = "#FF1B8D";
+  const gold = "#C9A84C";
+  const bg = "#0C0A0B";
+  const cardBg = "#161214";
+  const border = "rgba(255,255,255,0.07)";
+  const textPrimary = "#F2EFF0";
+  const textMuted = "#666";
+  const textSub = "#999";
+
   return (
-    <div className="min-h-screen bg-bg text-text-primary font-sans max-w-[430px] mx-auto pb-12 overflow-x-hidden">
-      {/* Header */}
-      <div className="px-6 pt-[52px] pb-7 bg-gradient-to-b from-pink/[0.07] to-transparent border-b border-white/[0.07]">
-        <div className="text-[11px] tracking-[0.3em] text-gold uppercase mb-2.5 flex items-center gap-1.5">
+    <div
+      style={{
+        minHeight: "100vh",
+        background: bg,
+        color: textPrimary,
+        fontFamily: "'DM Sans', sans-serif",
+        maxWidth: "430px",
+        margin: "0 auto",
+        paddingBottom: "48px",
+        overflowX: "hidden",
+      }}
+    >
+      {/* ── HEADER ── */}
+      <div
+        style={{
+          padding: "52px 24px 28px",
+          background: `linear-gradient(180deg, rgba(255,27,141,0.07) 0%, transparent 100%)`,
+          borderBottom: `1px solid ${border}`,
+        }}
+      >
+        <div
+          style={{
+            fontSize: "11px",
+            letterSpacing: "0.3em",
+            color: gold,
+            textTransform: "uppercase",
+            marginBottom: "10px",
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+          }}
+        >
           <Sparkles size={11} /> Reality TV · Spoiler Protection
         </div>
-        <div className="font-playfair text-[58px] font-black leading-none text-white mb-2 -tracking-[1px]">
-          The <span className="text-pink italic">Tea</span>
+        <div
+          style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: "58px",
+            fontWeight: "900",
+            lineHeight: "1",
+            color: "#FFFFFF",
+            marginBottom: "8px",
+            letterSpacing: "-1px",
+          }}
+        >
+          The{" "}
+          <span style={{ color: pink, fontStyle: "italic" }}>Tea</span>
         </div>
-        <div className="text-sm text-text-muted font-light">
+        <div style={{ fontSize: "14px", color: textMuted, fontWeight: "300" }}>
           All the drama, none of the spoilers ✨
         </div>
       </div>
 
-      {/* Spoiler Toggle */}
+      {/* ── SPOILER TOGGLE ── */}
       <div
-        className={`flex items-center justify-between px-6 py-3.5 border-b border-white/[0.07] transition-colors duration-300 ${
-          spoilerFree ? "bg-pink/[0.04]" : "bg-transparent"
-        }`}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "14px 24px",
+          borderBottom: `1px solid ${border}`,
+          background: spoilerFree ? "rgba(255,27,141,0.04)" : "transparent",
+          transition: "background 0.3s ease",
+        }}
       >
         <div
-          className={`flex items-center gap-2 text-[13px] font-semibold tracking-[0.06em] uppercase transition-colors duration-300 ${
-            spoilerFree ? "text-pink" : "text-text-muted"
-          }`}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            fontSize: "13px",
+            fontWeight: "600",
+            letterSpacing: "0.06em",
+            textTransform: "uppercase",
+            color: spoilerFree ? pink : textMuted,
+            transition: "color 0.3s ease",
+          }}
         >
           {spoilerFree ? <EyeOff size={14} /> : <Eye size={14} />}
           {spoilerFree ? "Spoiler-Free Mode" : "Spoilers Allowed"}
         </div>
         <button
           onClick={() => setSpoilerFree((v) => !v)}
-          className={`w-[52px] h-7 rounded-full border-none cursor-pointer relative transition-colors duration-250 shrink-0 ${
-            spoilerFree ? "bg-pink" : "bg-[#2a2a2a]"
-          }`}
+          style={{
+            width: "52px",
+            height: "28px",
+            borderRadius: "100px",
+            background: spoilerFree ? pink : "#2a2a2a",
+            border: "none",
+            outline: "none",
+            cursor: "pointer",
+            position: "relative",
+            transition: "background 0.25s ease",
+            flexShrink: 0,
+          }}
         >
           <div
-            className={`absolute top-[3px] w-[22px] h-[22px] rounded-full bg-white transition-[left] duration-250 shadow-[0_2px_6px_rgba(0,0,0,0.5)] ${
-              spoilerFree ? "left-[27px]" : "left-[3px]"
-            }`}
+            style={{
+              position: "absolute",
+              top: "3px",
+              left: spoilerFree ? "27px" : "3px",
+              width: "22px",
+              height: "22px",
+              borderRadius: "50%",
+              background: "#fff",
+              transition: "left 0.25s ease",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.5)",
+            }}
           />
         </button>
       </div>
 
-      {/* Show Filter */}
-      <div className="py-3.5 border-b border-white/[0.07] overflow-x-auto [&::-webkit-scrollbar]:hidden">
-        <div className="flex gap-2 px-6 whitespace-nowrap">
+      {/* ── SHOW FILTER ── */}
+      <div
+        style={{
+          padding: "14px 0",
+          borderBottom: `1px solid ${border}`,
+          overflowX: "auto",
+          WebkitOverflowScrolling: "touch",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            gap: "8px",
+            padding: "0 24px",
+            whiteSpace: "nowrap",
+          }}
+        >
           {SHOWS.map((show) => {
             const active = selectedShow === show.id;
             return (
               <button
                 key={show.id}
                 onClick={() => setSelectedShow(show.id)}
-                className={`inline-flex items-center gap-[5px] px-3.5 py-2 rounded-full text-[13px] whitespace-nowrap font-sans cursor-pointer transition-all duration-200 ${
-                  active
-                    ? "font-semibold bg-pink text-white border-none"
-                    : "font-normal bg-white/5 text-text-sub border border-white/[0.07]"
-                }`}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "5px",
+                  padding: "8px 14px",
+                  borderRadius: "100px",
+                  fontSize: "13px",
+                  fontWeight: active ? "600" : "400",
+                  background: active ? pink : "rgba(255,255,255,0.05)",
+                  color: active ? "#fff" : textSub,
+                  border: active ? "none" : `1px solid ${border}`,
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                  whiteSpace: "nowrap",
+                  fontFamily: "'DM Sans', sans-serif",
+                }}
               >
                 {show.emoji} {show.label}
               </button>
@@ -112,20 +217,39 @@ export default function TheTea() {
         </div>
       </div>
 
-      {/* Fetch Button */}
-      <div className="px-6 pt-5 pb-2">
+      {/* ── FETCH BUTTON ── */}
+      <div style={{ padding: "20px 24px 8px" }}>
         <button
           onClick={fetchTea}
           disabled={loading}
-          className={`w-full py-[17px] border-none rounded-2xl text-base font-semibold flex items-center justify-center gap-2.5 font-sans tracking-[0.01em] transition-all duration-200 ${
-            loading
-              ? "bg-[#1e1e1e] text-text-muted cursor-not-allowed shadow-none"
-              : "bg-gradient-to-br from-pink to-[#C9184A] text-white cursor-pointer shadow-[0_4px_24px_rgba(255,27,141,0.35)]"
-          }`}
+          style={{
+            width: "100%",
+            padding: "17px",
+            background: loading
+              ? "#1e1e1e"
+              : `linear-gradient(135deg, ${pink} 0%, #C9184A 100%)`,
+            color: loading ? textMuted : "#fff",
+            border: "none",
+            borderRadius: "16px",
+            fontSize: "16px",
+            fontWeight: "600",
+            cursor: loading ? "not-allowed" : "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "10px",
+            fontFamily: "'DM Sans', sans-serif",
+            letterSpacing: "0.01em",
+            transition: "all 0.2s ease",
+            boxShadow: loading ? "none" : "0 4px 24px rgba(255,27,141,0.35)",
+          }}
         >
           {loading ? (
             <>
-              <RefreshCw size={16} className="animate-[spin_1s_linear_infinite]" />
+              <RefreshCw
+                size={16}
+                style={{ animation: "spin 1s linear infinite" }}
+              />
               Brewing the tea...
             </>
           ) : (
@@ -139,38 +263,68 @@ export default function TheTea() {
         </button>
       </div>
 
-      {/* Loading Skeleton */}
+      {/* ── LOADING SKELETON ── */}
       {loading && (
-        <div className="px-6 pt-4 flex flex-col gap-3">
+        <div style={{ padding: "16px 24px", display: "flex", flexDirection: "column", gap: "12px" }}>
           {[1, 2, 3].map((n) => (
             <div
               key={n}
-              className="bg-card rounded-2xl p-[18px] border border-white/[0.07] animate-[pulse_1.5s_ease-in-out_infinite]"
+              style={{
+                background: cardBg,
+                borderRadius: "16px",
+                padding: "18px",
+                border: `1px solid ${border}`,
+                animation: "pulse 1.5s ease-in-out infinite",
+              }}
             >
-              <div className="bg-[#222] h-2.5 w-2/5 rounded-md mb-3" />
-              <div className="bg-[#222] h-5 w-[85%] rounded-md mb-2" />
-              <div className="bg-[#1a1a1a] h-3.5 w-full rounded-md mb-1.5" />
-              <div className="bg-[#1a1a1a] h-3.5 w-[70%] rounded-md" />
+              <div style={{ background: "#222", height: "10px", width: "40%", borderRadius: "6px", marginBottom: "12px" }} />
+              <div style={{ background: "#222", height: "20px", width: "85%", borderRadius: "6px", marginBottom: "8px" }} />
+              <div style={{ background: "#1a1a1a", height: "14px", width: "100%", borderRadius: "6px", marginBottom: "6px" }} />
+              <div style={{ background: "#1a1a1a", height: "14px", width: "70%", borderRadius: "6px" }} />
             </div>
           ))}
         </div>
       )}
 
-      {/* Error */}
+      {/* ── ERROR ── */}
       {error && (
-        <div className="mx-6 mt-5 p-4 bg-[rgba(231,76,60,0.1)] border border-[rgba(231,76,60,0.3)] rounded-xl text-[#E8736A] text-sm text-center">
+        <div
+          style={{
+            margin: "20px 24px",
+            padding: "16px",
+            background: "rgba(231,76,60,0.1)",
+            border: "1px solid rgba(231,76,60,0.3)",
+            borderRadius: "12px",
+            color: "#E8736A",
+            fontSize: "14px",
+            textAlign: "center",
+          }}
+        >
           {error}
         </div>
       )}
 
-      {/* Empty State */}
+      {/* ── EMPTY STATE ── */}
       {!hasSearched && !loading && (
-        <div className="text-center px-8 py-[70px] text-text-muted">
-          <div className="text-[56px] mb-5">☕</div>
-          <div className="font-playfair text-2xl text-[#444] mb-2.5">
+        <div
+          style={{
+            textAlign: "center",
+            padding: "70px 32px",
+            color: textMuted,
+          }}
+        >
+          <div style={{ fontSize: "56px", marginBottom: "20px" }}>☕</div>
+          <div
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "24px",
+              color: "#444",
+              marginBottom: "10px",
+            }}
+          >
             Ready to spill?
           </div>
-          <div className="text-sm text-[#333] leading-relaxed">
+          <div style={{ fontSize: "14px", color: "#333", lineHeight: "1.6" }}>
             Pick your show above, then tap the button
             <br />
             to get the latest tea — spoiler free. 👑
@@ -178,13 +332,31 @@ export default function TheTea() {
         </div>
       )}
 
-      {/* Articles */}
+      {/* ── ARTICLES ── */}
       {!loading && articles.length > 0 && (
-        <div className="px-4 pt-4 flex flex-col gap-3">
+        <div
+          style={{
+            padding: "16px 16px 0",
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+          }}
+        >
           {/* Results header */}
-          <div className="px-2 text-xs text-text-muted tracking-[0.05em] uppercase flex justify-between items-center">
+          <div
+            style={{
+              padding: "0 8px",
+              fontSize: "12px",
+              color: textMuted,
+              letterSpacing: "0.05em",
+              textTransform: "uppercase",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
             <span>{articles.length} articles found</span>
-            <span className={spoilerFree ? "text-pink" : "text-[#444]"}>
+            <span style={{ color: spoilerFree ? pink : "#444" }}>
               {spoilerFree ? "🛡️ Spoilers protected" : "👁️ All spoilers visible"}
             </span>
           </div>
@@ -195,6 +367,7 @@ export default function TheTea() {
             const cat = article.category || "news";
             const catMeta = CAT_META[cat] || CAT_META.news;
             const showWall = spoilerFree && isSpoiler && !isRevealed;
+
             const displayText = isRevealed
               ? article.spoiler_summary
               : article.safe_summary;
@@ -202,57 +375,132 @@ export default function TheTea() {
             return (
               <div
                 key={i}
-                className="bg-card rounded-[18px] overflow-hidden animate-[fadeUp_0.35s_ease_both]"
                 style={{
+                  background: cardBg,
+                  borderRadius: "18px",
+                  border: `1px solid ${isSpoiler && spoilerFree ? "rgba(255,27,141,0.2)" : border}`,
+                  overflow: "hidden",
+                  animation: `fadeUp 0.35s ease both`,
                   animationDelay: `${i * 0.06}s`,
-                  border: isSpoiler && spoilerFree
-                    ? "1px solid rgba(255,27,141,0.2)"
-                    : "1px solid rgba(255,255,255,0.07)",
                   boxShadow: isSpoiler && spoilerFree
                     ? "0 0 0 1px rgba(255,27,141,0.1)"
                     : "none",
                 }}
               >
-                <div className="p-[18px]">
+                <div style={{ padding: "18px" }}>
                   {/* Top row */}
-                  <div className="flex justify-between items-center mb-2.5">
-                    <div className="text-[11px] font-medium text-gold uppercase tracking-[0.08em] max-w-[65%] overflow-hidden text-ellipsis whitespace-nowrap">
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: "11px",
+                        fontWeight: "500",
+                        color: gold,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                        maxWidth: "65%",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
                       {article.show || currentShow?.label}
                     </div>
                     <div
-                      className="text-[10px] font-bold tracking-[0.12em] px-[9px] py-[3px] rounded-full shrink-0"
-                      style={{ background: catMeta.bg, color: catMeta.color }}
+                      style={{
+                        fontSize: "10px",
+                        fontWeight: "700",
+                        letterSpacing: "0.12em",
+                        padding: "3px 9px",
+                        borderRadius: "100px",
+                        background: catMeta.bg,
+                        color: catMeta.color,
+                        flexShrink: 0,
+                      }}
                     >
                       {catMeta.label}
                     </div>
                   </div>
 
                   {/* Title */}
-                  <div className="font-playfair text-lg font-bold leading-[1.35] text-text-primary mb-2">
+                  <div
+                    style={{
+                      fontFamily: "'Playfair Display', serif",
+                      fontSize: "18px",
+                      fontWeight: "700",
+                      lineHeight: "1.35",
+                      color: textPrimary,
+                      marginBottom: "8px",
+                    }}
+                  >
                     {article.title}
                   </div>
 
                   {/* Meta */}
-                  <div className="text-xs text-text-muted mb-3.5 flex gap-1.5">
-                    <span className="text-[#555] font-medium">{article.source}</span>
-                    <span className="text-[#333]">·</span>
+                  <div
+                    style={{
+                      fontSize: "12px",
+                      color: textMuted,
+                      marginBottom: "14px",
+                      display: "flex",
+                      gap: "6px",
+                    }}
+                  >
+                    <span style={{ color: "#555", fontWeight: "500" }}>{article.source}</span>
+                    <span style={{ color: "#333" }}>·</span>
                     <span>{article.date}</span>
                   </div>
 
                   {/* Spoiler banner */}
                   {spoilerFree && isSpoiler && (
-                    <div className="flex items-center justify-between p-[10px_12px] bg-pink/[0.08] border border-pink/25 rounded-[10px] mb-3">
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-pink tracking-[0.05em]">
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        padding: "10px 12px",
+                        background: "rgba(255,27,141,0.08)",
+                        border: "1px solid rgba(255,27,141,0.25)",
+                        borderRadius: "10px",
+                        marginBottom: "12px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "6px",
+                          fontSize: "12px",
+                          fontWeight: "700",
+                          color: pink,
+                          letterSpacing: "0.05em",
+                        }}
+                      >
                         <AlertTriangle size={12} />
                         SPOILER ALERT
                       </div>
                       <button
                         onClick={() => toggleReveal(i)}
-                        className={`text-xs font-semibold px-3 py-[5px] rounded-full cursor-pointer font-sans transition-all duration-200 ${
-                          isRevealed
-                            ? "bg-white/[0.06] text-text-muted border border-white/[0.07]"
-                            : "bg-pink/20 text-pink border border-pink/40"
-                        }`}
+                        style={{
+                          fontSize: "12px",
+                          fontWeight: "600",
+                          padding: "5px 12px",
+                          borderRadius: "100px",
+                          background: isRevealed
+                            ? "rgba(255,255,255,0.06)"
+                            : "rgba(255,27,141,0.2)",
+                          color: isRevealed ? textMuted : pink,
+                          border: `1px solid ${isRevealed ? border : "rgba(255,27,141,0.4)"}`,
+                          cursor: "pointer",
+                          fontFamily: "'DM Sans', sans-serif",
+                          transition: "all 0.2s ease",
+                        }}
                       >
                         {isRevealed ? "Hide ↑" : "Reveal ↓"}
                       </button>
@@ -261,18 +509,39 @@ export default function TheTea() {
 
                   {/* Summary */}
                   <div
-                    className={`text-sm leading-[1.65] font-light transition-all duration-300 ${
-                      showWall
-                        ? "text-transparent blur-[5px] select-none bg-gradient-to-br from-[#2a1520] to-[#1e1218] p-3 rounded-lg"
-                        : "text-[#9A9A9A]"
-                    }`}
+                    style={{
+                      fontSize: "14px",
+                      lineHeight: "1.65",
+                      color: showWall ? "transparent" : "#9A9A9A",
+                      fontWeight: "300",
+                      filter: showWall ? "blur(5px)" : "none",
+                      userSelect: showWall ? "none" : "auto",
+                      transition: "filter 0.3s ease, color 0.3s ease",
+                      background: showWall
+                        ? "linear-gradient(135deg, #2a1520, #1e1218)"
+                        : "transparent",
+                      padding: showWall ? "12px" : "0",
+                      borderRadius: showWall ? "8px" : "0",
+                    }}
                   >
                     {showWall ? article.safe_summary : displayText}
                   </div>
 
                   {/* Revealed spoiler section */}
                   {isRevealed && (
-                    <div className="mt-3 p-[12px_14px] bg-pink/[0.06] border-l-[3px] border-l-pink rounded-r-lg text-sm leading-[1.65] text-[#AAA] font-light">
+                    <div
+                      style={{
+                        marginTop: "12px",
+                        padding: "12px 14px",
+                        background: "rgba(255,27,141,0.06)",
+                        borderLeft: `3px solid ${pink}`,
+                        borderRadius: "0 8px 8px 0",
+                        fontSize: "14px",
+                        lineHeight: "1.65",
+                        color: "#AAA",
+                        fontWeight: "300",
+                      }}
+                    >
                       {article.spoiler_summary}
                     </div>
                   )}
@@ -283,7 +552,17 @@ export default function TheTea() {
                       href={article.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs text-pink no-underline mt-3.5 font-medium opacity-80"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "4px",
+                        fontSize: "12px",
+                        color: pink,
+                        textDecoration: "none",
+                        marginTop: "14px",
+                        fontWeight: "500",
+                        opacity: "0.8",
+                      }}
                     >
                       Read full article →
                     </a>
@@ -295,21 +574,28 @@ export default function TheTea() {
         </div>
       )}
 
-      {/* No Results */}
+      {/* ── NO RESULTS ── */}
       {hasSearched && !loading && articles.length === 0 && !error && (
-        <div className="text-center px-8 py-[60px] text-text-muted">
-          <div className="text-5xl mb-4">🫖</div>
-          <div className="font-playfair text-[22px] text-[#444] mb-2">
+        <div style={{ textAlign: "center", padding: "60px 32px", color: textMuted }}>
+          <div style={{ fontSize: "48px", marginBottom: "16px" }}>🫖</div>
+          <div
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "22px",
+              color: "#444",
+              marginBottom: "8px",
+            }}
+          >
             No tea found
           </div>
-          <div className="text-sm text-[#333]">
+          <div style={{ fontSize: "14px", color: "#333" }}>
             Try a different show or try again
           </div>
         </div>
       )}
 
       {/* Bottom safe area */}
-      <div className="h-8" />
+      <div style={{ height: "32px" }} />
     </div>
   );
 }
